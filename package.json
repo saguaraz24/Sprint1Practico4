@@ -1,7 +1,7 @@
 {
   "name": "sprint1practico4",
   "version": "1.0.0",
-  "type":"module",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.2"
   }
 }
