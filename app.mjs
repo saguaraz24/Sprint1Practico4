@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
  // Ruta GET con parámetro de ruta
  //Solicitud: http://localhost:3000/user/123
  app.get(`/user/:id`, (req, res) => {
-    const userId = req.paramt.id;
-    console.log(`ID del usuario recibido: $(userID)`);
-    res.send (`Perfil del usuario con ID: $(userID)`);
+    const userID = req.params.id;
+    console.log(`ID del usuario recibido: ${userID}`);
+    res.send (`Perfil del usuario con ID: ${userID}`);
 
  });
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 //Ruta get con parámetro de consulta
 //Solicitud: http://localhost:3000/search?q=javascript
 app.get(`/search`,(req,res)=>{
-    const query = req.query.query
+    const query = req.query.q
     res.send(`Resultados de búsqueda para: ${query}`);
 });
 //Ruta GET con múltiples parámetros de consulta
@@ -42,6 +42,9 @@ app.get(`/filter`,(req,res)=>{
     res.send(`Filtrar por tipo: ${type},
         rango de precios: ${minPrice} - ${maxPrice}`);
 });
+
+//Ruta GET con parámetro de Consulta
+//Solicitud: http://localhost:3000/profile?edad=30
 
 app.get(`/profile`, (req,res)=>{
     const edad = req.query.edad;

@@ -1,6 +1,6 @@
 // Importa la capa de persistencia (repositorio)
-import TareaRepository from '../repository/tareaRepository.js';
-import Tarea from '../models/tarea.js'; // Importa el modelo de Tarea
+import TareaRepository from '../repository/tareaRepository.mjs';
+import Tarea from '../models/tarea.mjs'; // Importa el modelo de Tarea
 
 // Instancia el repositorio para manejar las tareas
 const tareaRepo = new TareaRepository();
@@ -21,11 +21,20 @@ export function listarTareasCompletadas() {
 
 // Servicio para crear una nueva tarea
 export function crearTarea(titulo, descripcion, completado = false) {
+    
+    if (!id) {
+        throw new Error("El ID de la tarea es obligatorio");
+    }
+
     // Obtiene todas las tareas
     const tareas = tareaRepo.obtenerTodas();
-    // Crea una nueva instancia del modelo Tarea
+     
+    // Generar ID automáticamente
+     const id = tareas.length > 0 ? tareas[tareas.length - 1].id + 1 : 1;
+
+     // Crea una nueva instancia del modelo Tarea
     const nuevaTarea = new Tarea(id, titulo, descripcion, completado);
-    // Valida que la tarea tenga un título válido
+     // Valida que la tarea tenga un título válido
     nuevaTarea.validar();
     // Añade la nueva tarea a la lista de tareas
     tareas.push(nuevaTarea);

@@ -3,13 +3,13 @@ import path from 'path'; // Módulo para manejar rutas de archivos
 
 import { fileURLToPath } from 'url'; // Para obtener la ruta del archivo actual
 // Importamos la interfaz de persistencia
-import TareasDataSource from './tareasDataSource.js';
-import Tarea from '../models/tarea.js'; // Importamos el modelo Tarea
+import TareasDataSource from '../repository/tareaDataSource.mjs';
+import Tarea from '../models/tarea.mjs'; // Importamos el modelo Tarea
 
 // Obtener la ruta del archivo de tareas
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const filePath = path.join(__dirname, 'tareas.json');
+const filePath = path.join(__dirname, '../tareas.txt');
 
 // Implementación concreta que extiende la interfaz TareasDataSource
 export default class TareaRepository extends TareasDataSource {
