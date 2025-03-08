@@ -24,7 +24,7 @@ app.get('/tareas', listarTareasController);
 // Ruta para obtener las tareas completadas
 app.get('/tareas/completadas', listarTareasCompletadasController);
 // Ruta para crear una nueva tarea
-app.post('/tareas', crearTareaController);
+app.post('/tareasn', crearTareaController);
 // Ruta para marcar una tarea como completada
 app.put('/tareas/:id/completar', completarTareaController);
 // Ruta para eliminar una tarea
