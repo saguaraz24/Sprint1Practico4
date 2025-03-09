@@ -22,9 +22,9 @@ export function listarTareasCompletadas() {
 // Servicio para crear una nueva tarea
 export function crearTarea(titulo, descripcion, completado = false) {
     
-    if (!id) {
-        throw new Error("El ID de la tarea es obligatorio");
-    }
+    // if (!id) {
+    //     throw new Error("El ID de la tarea es obligatorio");
+    // }
 
     // Obtiene todas las tareas
     const tareas = tareaRepo.obtenerTodas();

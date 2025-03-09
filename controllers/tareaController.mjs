@@ -13,35 +13,38 @@ export function listarTareasCompletadasController(req, res) {
     res.send(renderizarListaTareas(tareasCompletadas));
 }
 
-// Controlador para crear una nueva tarea
-// export function crearTareaController(req, res) {
-//     const { id, titulo, descripcion, completado } = req.body;
-//     crearTarea(id, titulo, descripcion, completado);
-//     res.send(renderizarMensaje('Tarea creada con éxito'));
-// }
-export function crearTareaController(req, res) {
-    console.log("Body recibido:", req.body); // Para ver qué datos llegan
-    
+export function crearTareaController(req, res) { 
+    console.log("Body recibido:", req.body); // Muestra qué datos llegan
+
+    // Verificar que req.body realmente contenga datos
     if (!req.body || Object.keys(req.body).length === 0) {
+        console.error("Error: Body vacío o no procesado correctamente");
         return res.status(400).json({ error: "El body está vacío" });
     }
-   // res.json({ mensaje: "Solicitud recibida" });
-    const { id, titulo, descripcion, completado } = req.body;
-    if (!id) {
-        return res.status(400).json({ error: "El ID es obligatorio" });
+
+    try { 
+        console.log("Intentando extraer datos del body...");
+        const { id, titulo, descripcion, completado } = req.body;
+        console.log("Datos extraídos:", id, titulo, descripcion, completado);
+
+        // if (!id) {
+        //     return res.status(400).json({ error: "El ID es obligatorio" });
+        // }
+        if (!titulo) {
+            return res.status(400).json({ error: "El título es obligatorio" });
+        }
+
+        console.log("Llamando a crearTarea...");
+        const nuevaTarea = crearTarea(titulo, descripcion, completado);
+        console.log("Tarea creada exitosamente:", nuevaTarea);
+
+        return res.status(201).json(nuevaTarea);
+    } catch (error) {
+        console.error("Error en la creación de tarea:", error);
+        return res.status(500).json({ error: error.message });
     }
-    if (!titulo) {
-        return res.status(400).json({ error: "El título es obligatorio" });
-    }
-try { 
-    //const tarea = { id, titulo, descripcion, completado };
-    const nuevaTarea = crearTarea(id, titulo, descripcion, completado);
-    return res.status(201).json(nuevaTarea);
-} catch (error)
-{
-    return res.status(500).json({ error: error.message });
 }
-}
+
 // Controlador para marcar una tarea como completada
 export function completarTareaController(req, res) {
     const { id } = req.params;
